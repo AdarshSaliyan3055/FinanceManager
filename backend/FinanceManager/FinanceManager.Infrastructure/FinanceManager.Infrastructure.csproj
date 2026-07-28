@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Authentication\" />
     <Folder Include="Configuration\" />
-    <Folder Include="DependencyInjection\" />
     <Folder Include="Persistence\Migrations\" />
     <Folder Include="Settings\" />
     <Folder Include="Services\" />
@@ -17,9 +16,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.10" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FinanceManager.Application\FinanceManager.Application.csproj" />
     <ProjectReference Include="..\FinanceManager.Domain\FinanceManager.Domain.csproj" />
   </ItemGroup>
 
