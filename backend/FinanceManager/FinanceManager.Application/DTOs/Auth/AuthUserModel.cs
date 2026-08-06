@@ -19,6 +19,7 @@ namespace FinanceManager.Application.DTOs.Auth
 
         public string? PhoneNumber { get; set; }
 
+        // Required for authentication
         public string PasswordHash { get; set; } = string.Empty;
 
         public string PasswordSalt { get; set; } = string.Empty;

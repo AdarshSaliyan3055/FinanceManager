@@ -1,17 +1,16 @@
-﻿CREATE   PROCEDURE usp_auth_login
+﻿CREATE   PROCEDURE [dbo].[usp_auth_refresh_token]
 (
-    @email NVARCHAR(510)
+    @refresh_token NVARCHAR(1000)
 )
 AS
 BEGIN
-
     SET NOCOUNT ON;
 
     --------------------------------------------------------
     -- Result Set 1 : User
     --------------------------------------------------------
 
-    SELECT
+     SELECT
         u.id,
         u.guid,
         u.first_name              AS FirstName,
@@ -28,27 +27,35 @@ BEGIN
         u.last_login_date         AS LastLoginDate,
         u.is_active               AS IsActive,
         u.is_deleted              AS IsDeleted
-    FROM users u
+    FROM refresh_tokens rt
+    INNER JOIN users u
+        ON rt.user_id = u.id
     WHERE
-        u.email = @email
+        rt.token = @refresh_token
+        AND rt.is_active = 1
+        AND rt.expires_date > SYSUTCDATETIME()
+        AND u.is_active = 1
         AND u.is_deleted = 0;
 
     --------------------------------------------------------
     -- Result Set 2 : Roles
     --------------------------------------------------------
 
-    SELECT
+   SELECT
         r.id,
         r.guid,
         r.name                    AS Name,
         r.code                    AS Code
-    FROM user_roles ur
+    FROM refresh_tokens rt
+    INNER JOIN users u
+        ON rt.user_id = u.id
+    INNER JOIN user_roles ur
+        ON u.id = ur.user_id
     INNER JOIN roles r
         ON ur.role_id = r.id
-    INNER JOIN users u
-        ON ur.user_id = u.id
     WHERE
-        u.email = @email
+        rt.token = @refresh_token
+        AND rt.is_active = 1
         AND ur.is_active = 1
         AND r.is_active = 1
         AND r.is_deleted = 0;
@@ -57,24 +64,26 @@ BEGIN
     -- Result Set 3 : Permissions
     --------------------------------------------------------
 
-    SELECT DISTINCT
+     SELECT DISTINCT
         p.id,
         p.guid,
         p.permission_key          AS PermissionKey,
         p.permission_name         AS PermissionName,
         p.module_name             AS ModuleName
-    FROM user_roles ur
+    FROM refresh_tokens rt
+    INNER JOIN users u
+        ON rt.user_id = u.id
+    INNER JOIN user_roles ur
+        ON u.id = ur.user_id
     INNER JOIN role_permissions rp
         ON ur.role_id = rp.role_id
     INNER JOIN permissions p
         ON rp.permission_id = p.id
-    INNER JOIN users u
-        ON ur.user_id = u.id
     WHERE
-        u.email = @email
-        AND ur.is_active = 1
+        rt.token = @refresh_token
+        AND rt.is_active = 1
         AND rp.is_allowed = 1
         AND p.is_active = 1
         AND p.is_deleted = 0;
 
-END;
+END

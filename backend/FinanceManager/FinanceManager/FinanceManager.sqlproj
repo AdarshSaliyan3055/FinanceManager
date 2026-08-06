@@ -93,5 +93,8 @@
     <Build Include="dbo\Tables\accounts.sql" />
     <Build Include="dbo\Tables\account_types.sql" />
     <Build Include="dbo\Stored Procedures\usp_auth_login.sql" />
+    <Build Include="dbo\Stored Procedures\usp_auth_save_refresh_token.sql" />
+    <Build Include="dbo\Stored Procedures\usp_auth_revoke_refresh_token.sql" />
+    <Build Include="dbo\Stored Procedures\usp_auth_refresh_token.sql" />
   </ItemGroup>
 </Project>

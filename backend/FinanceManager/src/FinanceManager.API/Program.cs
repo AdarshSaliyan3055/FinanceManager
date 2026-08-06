@@ -1,3 +1,4 @@
+using FinanceManager.Application.Configuration;
 using FinanceManager.Application.DependencyInjection;
 using FinanceManager.Infrastructure.DependencyInjection;
 
@@ -8,6 +9,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
+
+builder.Services.Configure<JwtSettings>(
+    builder.Configuration.GetSection("JwtSettings"));
 
 builder.Services.AddApplication();
 
