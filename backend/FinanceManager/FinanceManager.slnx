@@ -3,6 +3,10 @@
     <Project Path="FinanceManager.Application/FinanceManager.Application.csproj" Id="58c43260-61ef-4cd3-9ec3-5e0e2a0c4ee6" />
     <Project Path="FinanceManager.Domain/FinanceManager.Domain.csproj" Id="495129cb-c043-44c9-8bc5-b0be216c434f" />
     <Project Path="FinanceManager.Infrastructure/FinanceManager.Infrastructure.csproj" Id="4feb2bf4-6496-45d1-a1d7-67309f68dc01" />
+    <Project Path="FinanceManager/FinanceManager.sqlproj" Id="db830379-aaa6-4a20-ba6d-1c0554f9daf4">
+      <Build />
+      <Deploy />
+    </Project>
     <Project Path="src/FinanceManager.API/FinanceManager.API.csproj" Id="67de4f20-13e0-4e1a-901d-258c18c35cd8" />
   </Folder>
   <Folder Name="/tests/">
