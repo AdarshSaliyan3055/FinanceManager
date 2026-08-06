@@ -9,12 +9,15 @@
   <ItemGroup>
     <Folder Include="Authentication\" />
     <Folder Include="Configuration\" />
+    <Folder Include="Persistence\Context\" />
     <Folder Include="Persistence\Migrations\" />
+    <Folder Include="Persistence\Model\Auth\" />
     <Folder Include="Settings\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.79" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.10" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.10" />

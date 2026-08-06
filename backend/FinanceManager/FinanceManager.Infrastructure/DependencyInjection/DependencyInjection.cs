@@ -1,7 +1,7 @@
-﻿using FinanceManager.Domain.Interfaces;
-using FinanceManager.Infrastructure.Persistence.Context;
+﻿using FinanceManager.Application.Interfaces.Repositories;
+using FinanceManager.Domain.Interfaces;
+using FinanceManager.Infrastructure.Persistence.Connections;
 using FinanceManager.Infrastructure.Persistence.Repositories;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,11 +13,14 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddDbContext<FinanceDbContext>(options =>
-            options.UseSqlServer(
-                configuration.GetConnectionString("DefaultConnection")));
+        // Dapper Connection
+        services.AddScoped<IDbConnectionFactory, SqlConnectionFactory>();
 
+        // Category Repository
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+        // Authentication Repository
+        services.AddScoped<IAuthRepository, AuthRepository>();
 
         return services;
     }
