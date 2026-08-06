@@ -58,6 +58,7 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\users.sql" />
@@ -91,5 +92,6 @@
     <Build Include="dbo\Tables\audit_logs.sql" />
     <Build Include="dbo\Tables\accounts.sql" />
     <Build Include="dbo\Tables\account_types.sql" />
+    <Build Include="dbo\Stored Procedures\usp_auth_login.sql" />
   </ItemGroup>
 </Project>
